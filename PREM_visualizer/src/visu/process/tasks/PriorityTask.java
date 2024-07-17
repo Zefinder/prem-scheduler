@@ -2,20 +2,17 @@ package visu.process.tasks;
 
 /**
  * This class allows a Task to get a priority. Note that priority are usually on
- * the same processor.
+ * the same processor. This acts like a decorator...
  * 
  * @author Adrien Jakubiak
  */
 public class PriorityTask extends Task {
 
-	// Save the worst case execution time
-	private final int worstExecutionTime;
-
 	// Task priority
 	private final int priority;
 
 	// Task toString string
-	private final String taskToString;
+	private final Task task;
 
 	/**
 	 * Initializes a new priority task from an already existing task
@@ -25,9 +22,8 @@ public class PriorityTask extends Task {
 	 */
 	public PriorityTask(Task task, int priority) {
 		super(task.getName(), task.getPeriod(), task.getDeadline(), task.getStartTime());
-		this.worstExecutionTime = task.getWorstExecutionTime();
+		this.task = task;
 		this.priority = priority;
-		this.taskToString = task.toString();
 	}
 
 	/**
@@ -38,14 +34,23 @@ public class PriorityTask extends Task {
 	public int getPriority() {
 		return priority;
 	}
+	
+	/**
+	 * Returns wrapped task
+	 * 
+	 * @return wrapped task
+	 */
+	public Task getTask() {
+		return task;
+	}
 
 	@Override
 	public int getWorstExecutionTime() {
-		return worstExecutionTime;
+		return task.getWorstExecutionTime();
 	}
 
 	@Override
 	public String toString() {
-		return "%s,prio=%d".formatted(taskToString, priority);
+		return "%s,prio=%d".formatted(task.toString(), priority);
 	}
 }

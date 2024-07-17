@@ -42,6 +42,33 @@ public class Processor {
 		}
 	}
 
+	/**
+	 * Adds a task to the CPU task list
+	 * 
+	 * @param task the task to add
+	 */
+	public void addTask(Task task) {
+		taskList.add(task);
+	}
+
+	/**
+	 * Returns the CPU identifier
+	 * 
+	 * @return the CPU identifier
+	 */
+	public int getCpuNumber() {
+		return cpuNumber;
+	}
+
+	/**
+	 * Returns the task list
+	 * 
+	 * @return the task list
+	 */
+	public List<Task> getTaskList() {
+		return taskList;
+	}
+
 	@Override
 	public String toString() {
 		String str = "On CPU %d:".formatted(cpuNumber);
