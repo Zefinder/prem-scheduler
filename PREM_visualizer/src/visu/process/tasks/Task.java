@@ -10,15 +10,26 @@ public abstract class Task {
 
 	// Name identifier to display
 	private final String name;
-	
-	// Period and deadline of the task
+
+	// Period, deadline and start time of the task
 	private final int period;
 	private final int deadline;
+	private final int startTime;
 
-	public Task(String name, int period, int deadline) {
-		this.name = name == null ? "" : name;
+	/**
+	 * Initializes a new task with all important informations. If you want that the
+	 * deadline is the next period, just put the same values.
+	 * 
+	 * @param name the task name to display
+	 * @param period the task period
+	 * @param deadline the task deadline
+	 * @param startTime the task start time
+	 */
+	public Task(String name, int period, int deadline, int startTime) {
+		this.name = name == null ? "" : name; // Null catcher
 		this.period = period;
 		this.deadline = deadline;
+		this.startTime = startTime;
 	}
 
 	/**
@@ -27,21 +38,46 @@ public abstract class Task {
 	 * @return the worst execution time for that task
 	 */
 	public abstract int getWorstExecutionTime();
-	
+
+	/**
+	 * Returns the task name
+	 * 
+	 * @return the task name
+	 */
 	public String getName() {
 		return name;
 	}
-	
+
+	/**
+	 * Returns the task period
+	 * 
+	 * @return the task period
+	 */
 	public int getPeriod() {
 		return period;
 	}
-	
+
+	/**
+	 * Returns the task deadline
+	 * 
+	 * @return the task deadline
+	 */
 	public int getDeadline() {
 		return deadline;
 	}
 
+	/**
+	 * Returns the task start time
+	 * 
+	 * @return the task start time
+	 */
+	public int getStartTime() {
+		return startTime;
+	}
+
 	@Override
 	public String toString() {
-		return "Task[name=%s,T=%d,D=%d]".formatted(name, period, deadline);
+		return "name=%s,T=%d,D=%d,WCET=%d,start=%d".formatted(name, period, deadline, getWorstExecutionTime(),
+				startTime);
 	}
 }
